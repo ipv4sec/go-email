@@ -280,7 +280,7 @@ func (m *Message) writeBody(w io.Writer, total int64) (int64, error) {
 	// Encode if we have Content-Type, and we do not have Content-Transfer-Encoding set
 	if contentType := m.Header.Get("Content-Type"); len(contentType) > 0 && !m.Header.IsSet("Content-Transfer-Encoding") {
 
-		if strings.HasPrefix(contentType, "text") {
+		if strings.HasPrefix(contentType, "text/plain") {
 			return m.writeText(w, total)
 		}
 		return m.writeBase64(w, total)
